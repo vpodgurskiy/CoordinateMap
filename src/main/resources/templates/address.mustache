@@ -1,16 +1,16 @@
 <html>
 <body>
 <div>
-    <form method="get" action="find">
+    <form method="get" action="findAddress">
         <input type="text" name="address" placeholder="Введите адрес" />
         <button type="submit">Отправить</button>
     </form>
 </div>
-{{#message}}
-<div>Координаты введенного адреса:</div>
+{{#address}}
+<div><b>Координаты введенного адреса: {{inputAddress}}</b></div>
 <div>
-    <b>{{tt}}</b>
+    широта:  <b>{{coordinateLat}}</b> / долгота: <b>{{coordinateLon}}</b>
 </div>
-{{/message}}
+{{/address}}
 </body>
 </html>

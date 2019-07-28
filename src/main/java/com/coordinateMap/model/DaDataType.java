@@ -1,4 +1,4 @@
-package com.coordinateMap;
+package com.coordinateMap.model;
 
 public enum DaDataType {
     ADDRESS("address information");

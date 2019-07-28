@@ -1,5 +1,6 @@
-package com.coordinateMap;
+package com.coordinateMap.controller;
 
+import com.coordinateMap.model.DaDataType;
 import ru.dadata.api.DaData;
 import ru.dadata.api.entity.Address;
 
