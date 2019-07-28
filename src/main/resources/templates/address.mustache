@@ -1,0 +1,16 @@
+<html>
+<body>
+<div>
+    <form method="get" action="find">
+        <input type="text" name="address" placeholder="Введите адрес" />
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+{{#message}}
+<div>Координаты введенного адреса:</div>
+<div>
+    <b>{{tt}}</b>
+</div>
+{{/message}}
+</body>
+</html>

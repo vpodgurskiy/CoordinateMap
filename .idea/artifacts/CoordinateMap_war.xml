@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CoordinateMap:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="coordinate-map-1.0.0.war">
+      <element id="artifact" artifact-name="CoordinateMap:war exploded" />
+    </root>
+  </artifact>
+</component>
