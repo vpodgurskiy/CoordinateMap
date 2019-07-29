@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0q16ize" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.2.1">
+  <bpmn:process id="addressMap" name="Address mapping" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_07361bk</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_07361bk" sourceRef="StartEvent_1" targetRef="inputAddress" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ro7dth" sourceRef="inputAddress" targetRef="daDataService" />
+    <bpmn:endEvent id="EndEvent_1oeoe5q">
+      <bpmn:incoming>SequenceFlow_1satteg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_18x2jti" sourceRef="daDataService" targetRef="outputCoordinate" />
+    <bpmn:userTask id="inputAddress" name="Input Address">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="address" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_07361bk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1ro7dth</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="daDataService" name="DaDataService" camunda:class="com.coordinateMap.Application">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="address" />
+          <camunda:inputParameter name="DaDataType.ADDRESS" />
+          <camunda:outputParameter name="address">
+            <camunda:map />
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1ro7dth</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18x2jti</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1satteg" sourceRef="outputCoordinate" targetRef="EndEvent_1oeoe5q" />
+    <bpmn:userTask id="outputCoordinate" name="Output coordinate">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="address">
+            <camunda:map>
+              <camunda:entry key="inputAddress">address</camunda:entry>
+              <camunda:entry key="coordinateLat">dataSource.getAddress().getGeoLat()</camunda:entry>
+              <camunda:entry key="coordinateLon">dataSource.getAddress().getGeoLon()</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_18x2jti</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1satteg</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="addressMap">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="106" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07361bk_di" bpmnElement="SequenceFlow_07361bk">
+        <di:waypoint x="215" y="124" />
+        <di:waypoint x="310" y="124" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ro7dth_di" bpmnElement="SequenceFlow_1ro7dth">
+        <di:waypoint x="410" y="121" />
+        <di:waypoint x="480" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1oeoe5q_di" bpmnElement="EndEvent_1oeoe5q">
+        <dc:Bounds x="872" y="103" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="851" y="146" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_18x2jti_di" bpmnElement="SequenceFlow_18x2jti">
+        <di:waypoint x="580" y="121" />
+        <di:waypoint x="670" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0h2bg6m_di" bpmnElement="inputAddress">
+        <dc:Bounds x="310" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0m41hm1_di" bpmnElement="daDataService">
+        <dc:Bounds x="480" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1satteg_di" bpmnElement="SequenceFlow_1satteg">
+        <di:waypoint x="770" y="121" />
+        <di:waypoint x="872" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_16gae1i_di" bpmnElement="outputCoordinate">
+        <dc:Bounds x="670" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
