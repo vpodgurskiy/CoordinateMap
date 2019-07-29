@@ -16,7 +16,7 @@ public class GreetingController {
         if (address.isEmpty()) {
             return "address";
         }
-        DataSourceDaData dataSource = new DataSourceDaData();
+        DaDataService dataSource = new DaDataService();
         dataSource.fillDaDataInformation(DaDataType.ADDRESS, address);
         Map<String, Object> map = new HashMap<>();
         map.put("inputAddress", address);
